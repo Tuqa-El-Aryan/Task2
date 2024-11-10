@@ -1,0 +1,20 @@
+::ng-deep html, body {
+    background-color: rgb(228, 228, 228);
+}
+
+
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+  }
+
+
+  .mat-mdc-extended-fab{
+    background-color: rgb(230, 228, 228);
+  }

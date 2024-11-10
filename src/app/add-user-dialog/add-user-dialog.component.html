@@ -1,0 +1,65 @@
+<h1 mat-dialog-title>Add New User</h1>
+<div mat-dialog-content>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="form-container">
+      <mat-form-field class="form-field">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="fname">
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lname">
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email">
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Status</mat-label>
+        <input matInput formControlName="status">
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Gender</mat-label>
+        <input matInput formControlName="gender">
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Date of Birth</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dob">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Middle Name</mat-label>
+        <input matInput formControlName="mname">
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Activated</mat-label>
+        <input matInput formControlName="activated">
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Phone</mat-label>
+        <input matInput formControlName="phone">
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Nationality</mat-label>
+        <input matInput formControlName="nationality">
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Language</mat-label>
+        <input matInput formControlName="lang">
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Recitations</mat-label>
+        <input matInput formControlName="recitations">
+      </mat-form-field>
+      <mat-form-field class="full-width-field">
+        <mat-label>Image URL</mat-label>
+        <input matInput formControlName="image">
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button type="button" (click)="onCancel()">Cancel</button>
+      <button mat-button type="submit">Add</button>
+    </div>
+  </form>
+</div>

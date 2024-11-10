@@ -1,0 +1,59 @@
+.user-details {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .user-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .form-field {
+    flex: 1;
+    margin-right: 40px;
+  }
+  
+  
+  ::ng-deep .mat-mdc-text-field-wrapper {
+    height: auto;
+    flex: auto;
+    will-change: auto;
+    background-color: rgb(246, 243, 243);
+}
+  
+::ng-deep html, body{
+    background-color: rgb(228, 228, 228);
+}
+
+h2{
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.update-button {
+    width: 100%; 
+    max-width: 500px; 
+    margin: 20px 0;
+    border-radius: 10px; 
+    font-size: 18px; 
+    max-height: 45px;
+   
+  }
+
+  .mat-mdc-extended-fab {
+    background-color: rgb(238, 238, 238);
+}
+  
+  .update-button:hover {
+    background-color: #dfdfdf; 
+  }
+  
+  

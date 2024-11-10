@@ -1,0 +1,80 @@
+::ng-deep html, body {
+    background-color: rgb(228, 228, 228);
+}
+
+demo-table {
+    width: 100%;
+}
+
+
+::ng-deep .mat-elevation-z8 {
+    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+}
+table {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    overflow: hidden;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+}
+
+.mat-mdc-header-row {
+    background-color: rgb(185, 185, 185);
+}
+
+.mat-mdc-cell {
+    width: 10%;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+    border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+    font-weight: bold;
+}
+
+.table-container {
+    justify-content: center;
+    align-items: center;
+    margin: 3% auto 0 auto;
+    width: 90%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.1);
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30%;
+}
+
+.mat-mdc-extended-fab {
+    background-color: rgb(230, 228, 228);
+}
+
+h2 {
+    margin-top: 5%;
+    margin-left: 5%;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+
+::ng-deep .mat-mdc-paginator-outer-container {
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+    overflow: hidden;
+}
+
+::ng-deep .mat-mdc-paginator-container {
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+    overflow: hidden;
+}

@@ -1,0 +1,40 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f3f4f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .container {
+    text-align: center;
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    border-radius: 8px;
+  }
+  
+  h1 {
+    font-size: 6rem;
+    color: #ff6b6b;
+    margin: 0;
+  }
+  
+  p {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+  }
+
+
+  .mat-mdc-extended-fab{
+    background-color: rgb(230, 228, 228);
+  }
