@@ -13,7 +13,7 @@
 </mat-toolbar>
 
 <div class="user-details">
-    <h2>User Details</h2>
+    <h2>{{ isNewUser ? 'Create New User' : 'User Details' }}</h2>
     <form [formGroup]="userForm" class="user-form">
      
      <div class="form-row">
