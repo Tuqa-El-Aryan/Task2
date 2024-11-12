@@ -28,7 +28,7 @@ export class UserService {
   updateUser(user: UsersList): Observable<boolean> {
     const index = this.users.findIndex(u => u.id === user.id);
     if (index !== -1) {
-      // Preserve existing status if not provided in the update payload
+   
       user.status = user.status || this.users[index].status;
       this.users[index] = { ...this.users[index], ...user };
       return of(true);

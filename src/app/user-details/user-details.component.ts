@@ -38,7 +38,7 @@ export class UserDetailsComponent implements OnInit {
   userId: number | null = null;
   userForm!: FormGroup;
   isFormDirty = false;
-  initialFormValues: any = {}; // To store initial form values
+  initialFormValues: any = {}; 
   isNewUser = false;
 
   constructor(
@@ -90,9 +90,9 @@ export class UserDetailsComponent implements OnInit {
       .getUserById(userId)
       .subscribe((user: UsersList | undefined) => {
         if (user) {
-          this.initialFormValues = { ...user }; // Save the initial form values
+          this.initialFormValues = { ...user }; 
           this.userForm.patchValue(user);
-          this.userForm.markAsPristine(); // Mark the form as pristine when the user is loaded
+          this.userForm.markAsPristine(); 
         } else {
           console.error('User not found');
           this.snackBar.open('User not found', 'Close', { duration: 3000 });
@@ -108,20 +108,20 @@ export class UserDetailsComponent implements OnInit {
       }
     });
 
-    // Check if the form is invalid
+    
     if (this.userForm.invalid) {
       console.warn('Form is invalid');
-      console.log('Form errors:', this.userForm.errors); // Log the form errors
-      return; // If the form is invalid, exit early without submitting
+      console.log('Form errors:', this.userForm.errors); 
+      return; 
     }
 
     if (this.isNewUser) {
       this.userForm.patchValue({
-        status: 'Active', // Set the default status as 'Active'
+        status: 'Active', 
       });
     }
 
-    // If the form is valid, proceed with the logic
+    
     if (this.isNewUser) {
       console.log('Creating a new user:', this.userForm.value);
       this.userService.addUser(this.userForm.value).subscribe(

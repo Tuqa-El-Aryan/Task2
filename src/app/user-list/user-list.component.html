@@ -58,14 +58,14 @@
       </ng-container>
 
        
-     <!-- Action Menu -->
+    
      <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>Action</th>
       <td mat-cell *matCellDef="let user">
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User actions" (click)="$event.stopPropagation()">
           <mat-icon>more_vert</mat-icon>
         </button>
-        <!-- Menu for Edit and Delete actions -->
+      
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="navigateToEdit(user.id)">Edit</button>
           <button mat-menu-item (click)="openDeleteDialog(user)">Delete</button>

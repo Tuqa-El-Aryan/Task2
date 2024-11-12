@@ -15,7 +15,7 @@ import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.compo
 import { UsersList } from '../users-data';
 import { UserService } from '../user.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatMenuModule } from '@angular/material/menu'; // Import MatMenuModule
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-user-list',
@@ -62,12 +62,12 @@ export class UserListComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  // Navigate to the user detail page for editing
+
   navigateToEdit(userId: number): void {
     this.router.navigate(['/user-details', userId]);
   }
 
-  // Open the delete confirmation dialog
+ 
   openDeleteDialog(user: UsersList): void {
     const dialogRef = this.dialog.open(DeleteUserDialogComponent, {
       data: { user },
