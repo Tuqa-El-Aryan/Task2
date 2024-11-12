@@ -55,5 +55,24 @@ h2{
   .update-button:hover {
     background-color: #dfdfdf; 
   }
+
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+  }
+
+  .invalid-field .mat-form-field-outline {
+    border-color: red !important;
+  }
+  
+  .invalid-field .mat-form-field-label {
+    color: red !important;
+  }
   
   

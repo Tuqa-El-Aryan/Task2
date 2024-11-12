@@ -1,25 +1,43 @@
+<mat-toolbar>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>User Details Page</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>
+
 <div class="user-details">
     <h2>User Details</h2>
     <form [formGroup]="userForm" class="user-form">
      
      <div class="form-row">
+      
         <mat-form-field class="form-field" appearance="outline">
-          <mat-label>Email *</mat-label>
+          <mat-label>Email </mat-label>
           <input matInput formControlName="email">
         </mat-form-field>
+
         <mat-form-field class="form-field" appearance="outline">
-          <mat-label>Date of Birth *</mat-label>
-          <input matInput formControlName="dob">
+          <mat-label>Date of Birth</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dob">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
      
       <div class="form-row">
         <mat-form-field class="form-field" appearance="outline">
-          <mat-label>First Name *</mat-label>
+          <mat-label>First Name </mat-label>
           <input matInput formControlName="fname">
         </mat-form-field>
         <mat-form-field class="form-field" appearance="outline">
-          <mat-label>Middle Name *</mat-label>
+          <mat-label>Middle Name </mat-label>
           <input matInput formControlName="mname">
         </mat-form-field>
         
@@ -27,50 +45,61 @@
       
       <div class="form-row">
         <mat-form-field class="form-field" appearance="outline">
-          <mat-label>Last Name *</mat-label>
+          <mat-label>Last Name </mat-label>
           <input matInput formControlName="lname">
         </mat-form-field>
         <mat-form-field class="form-field" appearance="outline">
-          <mat-label>Is Activated *</mat-label>
-          <input matInput formControlName="activated">
+          <mat-label>Is Activated</mat-label>
+          <mat-select formControlName="activated">
+            <mat-option [value]="true">Activated</mat-option>
+            <mat-option [value]="false">Not Activated</mat-option>
+          </mat-select>
         </mat-form-field>
         
       </div>
 
       <div class="form-row">
         <mat-form-field class="form-field" appearance="outline">
-          <mat-label>Profile Image Url *</mat-label>
+          <mat-label>Profile Image Url </mat-label>
           <input matInput formControlName="image">
         </mat-form-field>
       
         <mat-form-field class="form-field" appearance="outline">
-          <mat-label>Phone Number *</mat-label>
+          <mat-label>Phone Number </mat-label>
           <input matInput formControlName="phone">
         </mat-form-field>
       </div>
       <div class="form-row">
         <mat-form-field class="form-field" appearance="outline">
-          <mat-label>Gender *</mat-label>
-          <input matInput formControlName="gender">
+          <mat-label>Gender</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option value="Male">Male</mat-option>
+            <mat-option value="Female">Female</mat-option>
+          </mat-select>
         </mat-form-field>
         <mat-form-field class="form-field" appearance="outline">
-          <mat-label>Main Language *</mat-label>
+          <mat-label>Main Language </mat-label>
           <input matInput formControlName="lang">
         </mat-form-field>
         
       </div>
+
+      
       <div class="form-row">
         <mat-form-field class="form-field" appearance="outline">
-          <mat-label>Nationality *</mat-label>
+          <mat-label>Nationality </mat-label>
           <input matInput formControlName="nationality">
         </mat-form-field>
         <mat-form-field class="form-field" appearance="outline">
-          <mat-label>Recitations *</mat-label>
+          <mat-label>Recitations </mat-label>
           <input matInput formControlName="recitations">
         </mat-form-field>
       </div>
+      
     </form>
-    <button mat-fab extended class="update-button" color="primary" (click)="updateUser()" [disabled]="!isFormDirty">Update</button>
+    <button mat-fab extended class="update-button" (click)="saveUser()" [disabled]="!isFormDirty">
+      {{ isNewUser ? 'Create' : 'Update' }}
+    </button>
   </div>
 
   

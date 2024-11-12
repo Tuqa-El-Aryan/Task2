@@ -60,12 +60,17 @@ table {
 }
 
 h2 {
-    margin-top: 5%;
-    margin-left: 5%;
     font-size: 40px;
     font-weight: 500;
-}
+    margin: 0;
+  }
 
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5% 5% 0;
+  }
 
 ::ng-deep .mat-mdc-paginator-outer-container {
     border-bottom-left-radius: 10px !important;
@@ -78,3 +83,18 @@ h2 {
     border-bottom-right-radius: 10px !important;
     overflow: hidden;
 }
+
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+
+  .mat-mdc-extended-fab{
+    background-color: rgb(230, 228, 228);
+  }

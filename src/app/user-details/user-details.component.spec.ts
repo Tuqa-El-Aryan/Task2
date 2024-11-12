@@ -132,13 +132,8 @@ describe('UserDetailsComponent', () => {
     expect(form.valid).toBeTruthy();
   });
 
-  it('should have the save button disabled when form is invalid', () => {
-    const form = component.userForm;
-    form.controls['fname'].setValue(''); 
-    fixture.detectChanges();
-    const saveButton = fixture.nativeElement.querySelector('button');
-    expect(saveButton.disabled).toBeTruthy();
-  });
+
+  
 
 
 

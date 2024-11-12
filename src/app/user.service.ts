@@ -17,20 +17,26 @@ export class UserService {
     return of(user);
   }
 
-  addUser(user: UsersList): Observable<void> {
-    this.users.push(user);
-    return of();
+  addUser(user: UsersList): Observable<UsersList> {
+    const newId = this.users.length > 0 ? Math.max(...this.users.map(u => u.id)) + 1 : 1;
+    const newUser = { ...user, id: newId, status: 'Active' };
+    
+    this.users.push(newUser);
+    return of(newUser);
   }
 
   updateUser(user: UsersList): Observable<boolean> {
     const index = this.users.findIndex(u => u.id === user.id);
     if (index !== -1) {
-      this.users[index] = user;
+      // Preserve existing status if not provided in the update payload
+      user.status = user.status || this.users[index].status;
+      this.users[index] = { ...this.users[index], ...user };
       return of(true);
     } else {
       return of(false);
     }
   }
+
   deleteUser(id: number): Observable<void> {
     console.log('Deleting user with id:', id); 
     this.users = this.users.filter(u => u.id !== id);
