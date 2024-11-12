@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ErrorPageComponent } from './error-page.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterTestingModule } from '@angular/router/testing';
+
 import { By } from '@angular/platform-browser';
 
 describe('ErrorPageComponent', () => {
@@ -11,7 +11,7 @@ describe('ErrorPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ErrorPageComponent,MatCardModule, MatButtonModule, RouterTestingModule],
+      imports: [ErrorPageComponent,MatCardModule, MatButtonModule],
       
     })
     .compileComponents();

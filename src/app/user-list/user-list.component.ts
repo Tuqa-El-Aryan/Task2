@@ -11,7 +11,6 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DeleteUserDialogComponent } from '../delete-user-dialog/delete-user-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
 import { UsersList } from '../users-data';
 import { UserService } from '../user.service';
 import { MatToolbarModule } from '@angular/material/toolbar';

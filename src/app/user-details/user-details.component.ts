@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { UserService } from '../user.service';
 import { UsersList } from '../users-data';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-user-details',
@@ -32,14 +34,15 @@ import { CommonModule } from '@angular/common';
     MatNativeDateModule,
   ],
   templateUrl: './user-details.component.html',
-  styleUrl: './user-details.component.css',
+  styleUrls: ['./user-details.component.css'],
 })
-export class UserDetailsComponent implements OnInit {
+export class UserDetailsComponent implements OnInit, OnDestroy {
   userId: number | null = null;
   userForm!: FormGroup;
   isFormDirty = false;
-  initialFormValues: any = {}; 
+  original: any = {}; // To store the original values
   isNewUser = false;
+  private destroy$ = new Subject<void>();
 
   constructor(
     private route: ActivatedRoute,
@@ -66,31 +69,43 @@ export class UserDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      const id = params.get('id');
-      if (id === 'new') {
-        this.isNewUser = true;
-      } else if (id !== null) {
-        this.userId = +id;
-        this.loadUserDetails(this.userId);
-      } else {
-        console.error('ID parameter not found');
-        this.snackBar.open('Invalid user ID', 'Close', { duration: 3000 });
-      }
-    });
+    this.route.paramMap
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((params) => {
+        const id = params.get('id');
+        if (id === 'new') {
+          this.isNewUser = true;
+          this.userForm.reset();
+          this.original = this.userForm.getRawValue(); // Initialize original values
+        } else if (id !== null) {
+          this.isNewUser = false;
+          this.userId = +id;
+          this.loadUserDetails(this.userId);
+        } else {
+          console.error('ID parameter not found');
+          this.snackBar.open('Invalid user ID', 'Close', { duration: 3000 });
+        }
+      });
 
-    this.userForm.valueChanges.subscribe(() => {
-      this.isFormDirty = !this.userForm.pristine;
-      console.log('Form is dirty:', this.isFormDirty);
-    });
+    this.userForm.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.checkIfFormDirty();
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   loadUserDetails(userId: number): void {
     this.userService
       .getUserById(userId)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((user: UsersList | undefined) => {
         if (user) {
-          this.initialFormValues = { ...user }; 
+          this.original = { ...user }; // Store the original values
           this.userForm.patchValue(user);
           this.userForm.markAsPristine(); 
         } else {
@@ -98,6 +113,18 @@ export class UserDetailsComponent implements OnInit {
           this.snackBar.open('User not found', 'Close', { duration: 3000 });
         }
       });
+  }
+
+  checkIfFormDirty(): void {
+    let isDirty = false;
+    Object.keys(this.userForm.controls).forEach((controlName) => {
+      const control = this.userForm.get(controlName);
+      if (control && control.value !== this.original[controlName]) {
+        isDirty = true;
+      }
+    });
+
+    this.isFormDirty = isDirty;
   }
 
   saveUser(): void {
@@ -108,34 +135,27 @@ export class UserDetailsComponent implements OnInit {
       }
     });
 
-    
     if (this.userForm.invalid) {
       console.warn('Form is invalid');
-      console.log('Form errors:', this.userForm.errors); 
       return; 
     }
 
     if (this.isNewUser) {
       this.userForm.patchValue({
-        status: 'Active', 
+        status: 'Active',
       });
     }
 
-    
     if (this.isNewUser) {
       console.log('Creating a new user:', this.userForm.value);
       this.userService.addUser(this.userForm.value).subscribe(
         () => {
-          this.snackBar.open('User created successfully', 'Close', {
-            duration: 3000,
-          });
+          this.snackBar.open('User created successfully', 'Close', { duration: 3000 });
           this.router.navigate(['/user-list']);
         },
         (error) => {
           console.error('Error creating user', error);
-          this.snackBar.open('Failed to create user', 'Close', {
-            duration: 3000,
-          });
+          this.snackBar.open('Failed to create user', 'Close', { duration: 3000 });
         }
       );
     } else {
@@ -143,24 +163,19 @@ export class UserDetailsComponent implements OnInit {
       this.userService.updateUser(this.userForm.value).subscribe(
         (success) => {
           if (success) {
-            this.snackBar.open('User details updated successfully', 'Close', {
-              duration: 3000,
-            });
+            this.snackBar.open('User details updated successfully', 'Close', { duration: 3000 });
             this.isFormDirty = false;
             this.userForm.markAsPristine();
+            this.original = this.userForm.getRawValue(); // Update the original values after successful save
             this.router.navigate(['/user-list']);
           } else {
             console.error('Error updating user');
-            this.snackBar.open('Failed to update user', 'Close', {
-              duration: 3000,
-            });
+            this.snackBar.open('Failed to update user', 'Close', { duration: 3000 });
           }
         },
         (error) => {
           console.error('Error updating user', error);
-          this.snackBar.open('Failed to update user', 'Close', {
-            duration: 3000,
-          });
+          this.snackBar.open('Failed to update user', 'Close', { duration: 3000 });
         }
       );
     }
