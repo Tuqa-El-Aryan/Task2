@@ -1,98 +1,65 @@
-  <mat-toolbar>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+<mat-toolbar>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
       <mat-icon>menu</mat-icon>
-    </button>
-    <span>User List Page</span>
-    <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+  </button>
+  <span>User List Page</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
       <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
       <mat-icon>share</mat-icon>
-    </button>
-  </mat-toolbar>
+  </button>
+</mat-toolbar>
 
-
-    <div class="header-container">
+<div class="header-container">
   <h2>Users List</h2>
   <div class="button-container">
-    <button mat-fab extended (click)="addUser()">
-      <mat-icon>person</mat-icon>
-      Create User
-    </button>
+      <button mat-fab extended (click)="addUser()">
+          <mat-icon>person</mat-icon>
+          Create User
+      </button>
   </div>
 </div>
 
-
-  <div  class="table-container">
-    <div class="mat-elevation-z8" ngSkipHydration>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
-     
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef>ID</th>
-        <td mat-cell *matCellDef="let user">{{user.id}}</td>
-      </ng-container>
-  
-      
-      <ng-container matColumnDef="fname">
-        <th mat-header-cell *matHeaderCellDef>First Name</th>
-        <td mat-cell *matCellDef="let user">{{user.fname}}</td>
-      </ng-container>
-  
-      
-      <ng-container matColumnDef="lname">
-        <th mat-header-cell *matHeaderCellDef>Last Name</th>
-        <td mat-cell *matCellDef="let user">{{user.lname}}</td>
-      </ng-container>
-  
-      
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef>Email</th>
-        <td mat-cell *matCellDef="let user">{{user.email}}</td>
-      </ng-container>
-
-       
-       <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef>Status</th>
-        <td mat-cell *matCellDef="let user">{{user.status}}</td>
-      </ng-container>
-
-       
-    
-     <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef>Action</th>
-      <td mat-cell *matCellDef="let user">
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User actions" (click)="$event.stopPropagation()">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-      
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="navigateToEdit(user.id)">Edit</button>
-          <button mat-menu-item (click)="openDeleteDialog(user)">Delete</button>
-        </mat-menu>
-      </td>
-    </ng-container>
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr
-          mat-row
-          (click)="onRowClick(user)"  
-          [class.demo-row-is-clicked]="clickedRows.has(user)"
-          *matRowDef="let user; columns: displayedColumns;">
-      </tr>
-
-      
-    </table>
-
-    <mat-paginator [pageSizeOptions]="[2, 4, 6, 8, 10]"
-    showFirstLastButtons
-    aria-label="Select page">
-    </mat-paginator>
-    </div>
-    
-
+<div class="table-container mat-elevation-z8" ngSkipHydration>
+  <div class="table-wrapper">
+      <table mat-table [dataSource]="dataSource" class="demo-table">
+          <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>ID</th>
+              <td mat-cell *matCellDef="let user">{{user.id}}</td>
+          </ng-container>
+          <ng-container matColumnDef="fname">
+              <th mat-header-cell *matHeaderCellDef>First Name</th>
+              <td mat-cell *matCellDef="let user">{{user.fname}}</td>
+          </ng-container>
+          <ng-container matColumnDef="lname">
+              <th mat-header-cell *matHeaderCellDef>Last Name</th>
+              <td mat-cell *matCellDef="let user">{{user.lname}}</td>
+          </ng-container>
+          <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef>Email</th>
+              <td mat-cell *matCellDef="let user">{{user.email}}</td>
+          </ng-container>
+          <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let user">{{user.status}}</td>
+          </ng-container>
+          <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef>Action</th>
+              <td mat-cell *matCellDef="let user">
+                  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User actions" (click)="$event.stopPropagation()">
+                      <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                      <button mat-menu-item (click)="navigateToEdit(user.id)">Edit</button>
+                      <button mat-menu-item (click)="openDeleteDialog(user)">Delete</button>
+                  </mat-menu>
+              </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row (click)="onRowClick(user)" [class.demo-row-is-clicked]="clickedRows.has(user)" *matRowDef="let user; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[2, 4, 6, 8, 10]" showFirstLastButtons aria-label="Select page"></mat-paginator>
   </div>
- 
-  
- 
-
+</div>

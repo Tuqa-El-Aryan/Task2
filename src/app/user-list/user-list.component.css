@@ -1,19 +1,53 @@
+.table-wrapper {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.table-container {
+    justify-content: center;
+    align-items: center;
+    margin: 3% auto 0 auto;
+    width: 90%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.mat-mdc-paginator {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+::ng-deep .mat-mdc-paginator-container {
+    width: 100%;
+    overflow: hidden;
+    padding: 0 10px;
+}
+
+@media (max-width: 600px) {
+    .mat-mdc-paginator {
+        width: calc(100% - 20px);
+        padding: 0 10px;
+    }
+}
+
 ::ng-deep html, body {
     background-color: rgb(228, 228, 228);
 }
 
-demo-table {
+.demo-table {
     width: 100%;
 }
-
 
 ::ng-deep .mat-elevation-z8 {
     box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
 }
+
 table {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
     overflow: hidden;
+    width: 100%;
 }
 
 .mat-mdc-row .mat-mdc-cell {
@@ -38,16 +72,6 @@ table {
     font-weight: bold;
 }
 
-.table-container {
-    justify-content: center;
-    align-items: center;
-    margin: 3% auto 0 auto;
-    width: 90%;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.1);
-}
-
 .button-container {
     display: flex;
     justify-content: center;
@@ -63,38 +87,25 @@ h2 {
     font-size: 40px;
     font-weight: 500;
     margin: 0;
-  }
+}
 
-  .header-container {
+.header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 5% 5% 0;
-  }
-
-::ng-deep .mat-mdc-paginator-outer-container {
-    border-bottom-left-radius: 10px !important;
-    border-bottom-right-radius: 10px !important;
-    overflow: hidden;
-}
-
-::ng-deep .mat-mdc-paginator-container {
-    border-bottom-left-radius: 10px !important;
-    border-bottom-right-radius: 10px !important;
-    overflow: hidden;
 }
 
 .example-spacer {
     flex: 1 1 auto;
-  }
+}
 
-  .button-container {
+.button-container {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-  }
+}
 
-
-  .mat-mdc-extended-fab{
+.mat-mdc-extended-fab {
     background-color: rgb(230, 228, 228);
-  }
+}
