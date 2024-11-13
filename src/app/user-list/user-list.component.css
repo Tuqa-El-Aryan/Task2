@@ -28,7 +28,7 @@
 
 @media (max-width: 600px) {
     .mat-mdc-paginator {
-        width: calc(100% - 20px);
+        width: 100%;
         padding: 0 10px;
     }
 }
